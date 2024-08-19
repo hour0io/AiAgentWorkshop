@@ -1,0 +1,60 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Get Cryptocurrency Live Price",
+    "description": "Retrieves the live price of a specific cryptocurrency using the CoinGecko API.",
+    "version": "v1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.coingecko.com/api/v3"
+    }
+  ],
+  "paths": {
+    "/simple/price": {
+      "get": {
+        "description": "Get the live price for a specific cryptocurrency",
+        "operationId": "GetCryptoLivePrice",
+        "parameters": [
+          {
+            "name": "ids",
+            "in": "query",
+            "description": "The ID of the cryptocurrency to retrieve the price for (e.g., 'bitcoin', 'ethereum').",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "vs_currencies",
+            "in": "query",
+            "description": "The currency in which to retrieve the price (e.g., 'usd', 'eur').",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "usd"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with the cryptocurrency price",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "price": {
+                      "type": "number",
+                      "description": "The current price of the cryptocurrency"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
